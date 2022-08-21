@@ -1,14 +1,32 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Dropdownbutton ({options}) {
-    const [showoptions, setShowoptions] = useState(false)
-    const handleclick = () => {setShowoptions(() => !showoptions)}
+    const [option, setoption] = useState([])
+
+    // const navigate = useNavigate()
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/catdetails")
+            .then(res => {
+                setoption(res.data)
+            }).catch(err => console.log(err))
+    }, [])
 
     return (
         <>
-        {/* <div className="bg-gray-200 flex justify-center items-center rounded-xl">
+        <input id="cats" placeholder="select one" list="cat-breeds" className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-14 rounded-xl py-2 bg-white text-sm text-center font-medium text-gray-700 hover:bg-gray-50"/>
+            <datalist id="cat-breeds">
+                {option.map((e) => <option value={e.id} key={e.id}>{e.name}</option>)}
+            </datalist>
+        </>
+    )
+}
+
+{/* <div className="bg-gray-200 flex justify-center items-center rounded-xl">
             <div className="relative inline-block text-left">
                 <div>
                     <button onClick={() => handleclick} type="button" className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-16 rounded-xl py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
@@ -31,18 +49,5 @@ function Dropdownbutton ({options}) {
                 </div>)}
             </div>
         </div> */}
-
-            <input id="cats" placeholder="select one" list="cat-breeds" className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-16 rounded-xl py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"/>
-            <datalist id="cat-breeds">
-                <option value="persian" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">persian</option>
-                <option value="arabian" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">arabian</option>
-                {/* {options.map((optioned) => (<option className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" value={`${optioned}`}>{optioned}</option>))} */}
-                {/* {options.map(e => (<option className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" value={`${e.name}`}>{e.name}</option>))} */}
-                {/* <option></option> */}
-            </datalist>
-            
-        </>
-    )
-}
 
 export default Dropdownbutton
