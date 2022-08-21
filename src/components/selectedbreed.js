@@ -93,7 +93,7 @@ function Selectedlist() {
             </div>
             <h1 className="text-2xl font-bold justify-self-start ml-8">other photos</h1>
             <div className="grid grid-cols-4 gap-8 my-16 justify-items-center cover">
-                {eight.map(e => (<img src={e.url} alt="np found" className="w-10/12 rounded-2xl aspect-square shadow shadow-black"/>))}
+                {eight.map(e => (<img src={e.url} alt="no found" className="w-10/12 rounded-2xl aspect-square shadow shadow-black align-middle"/>))}
             </div>
         <Bottomheader />
         </>
