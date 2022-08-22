@@ -38,16 +38,8 @@ function Home() {
     //         console.log(e.name)
     //     })
     // }
-
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const sliceImg = catImg.slice(0, 4)
-
-
-    const handleSubmit = (e) => {
-        console.log("hi there")
-        navigate("/selectedBreed")
-        // console.log(e)
-    }
 
     return (
         <>
@@ -55,9 +47,9 @@ function Home() {
                 <div className="w-1/5 ml-20 gap-4 flex flex-col items-justify">
                     <h2 className="text-white text-3xl font-extrabold">Cat Lover's</h2>
                     <p className="text-white text-xl">get to know more about your cat breed</p>
-                    <form className="flex flex-row" onSubmit={handleSubmit}>
+                    <div className="flex flex-row">
                         <Dropdownbutton/>
-                    </form>
+                    </div>
                 </div>
             </header>
             
