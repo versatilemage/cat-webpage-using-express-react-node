@@ -1,13 +1,14 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Selectedlist from "./selectedbreed";
 
-function Dropdownbutton ({options}) {
+function Dropdownbutton() {
     const [option, setoption] = useState([])
+    const [breed, setbreed] = useState([])
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get("http://localhost:3001/catdetails")
@@ -16,12 +17,26 @@ function Dropdownbutton ({options}) {
             }).catch(err => console.log(err))
     }, [])
 
+    const onSelect = (e) => {
+        e.preventDefault()
+        setbreed(e.target.value)
+        navigate("/selectedBreed")
+        // {<Selectedlist breeded={breed} className="hidden"/>}
+    }
+
+    console.log(breed)
+
     return (
         <>
-        <input id="cats" placeholder="select one" list="cat-breeds" className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-14 rounded-xl py-2 bg-white text-sm text-center font-medium text-gray-700 hover:bg-gray-50"/>
-            <datalist id="cat-breeds">
-                {option.map((e) => <option value={e.id} key={e.id}>{e.name}</option>)}
-            </datalist>
+            <form>
+                {/* <input id="cats" placeholder="select one" list="cat-breeds" className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-14 rounded-xl py-2 bg-white text-sm text-center font-medium text-gray-700 hover:bg-gray-50" onSelect={onSelect}/>
+                <datalist id="cat-breeds"> */}
+                <select name="cat" onChange={onSelect} className="inline-flex w-full rounded-md border border-gray-300 shadow-sm px-10 rounded-xl py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                    <option className="bg-slate-300">-- select any cat breed --</option>
+                    {option.map((e) => <option value={e.id} key={e.id} className="bg-slate-300">{e.name}</option>)}
+                </select>
+                {/* </datalist> */}
+            </form>
         </>
     )
 }
@@ -49,5 +64,6 @@ function Dropdownbutton ({options}) {
                 </div>)}
             </div>
         </div> */}
+
 
 export default Dropdownbutton
