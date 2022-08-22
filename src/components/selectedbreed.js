@@ -3,10 +3,10 @@ import { useState, useEffect } from "react"
 import CatStatBar from "./table"
 import Bottomheader from "./footer"
 
-function Selectedlist() {
+function Selectedlist({breeded}) {
     const [breedData, setbreedData] = useState([])
     const [eight, seteight] = useState([])
-    const id = "beng"
+    const id = `${breeded}`
     useEffect(() => {
         axios.get("http://localhost:3001/catdetails")
             .then(res => {
@@ -23,6 +23,7 @@ function Selectedlist() {
 
     const filtering = breedData.filter((item) => item.id === `${id}`)
     console.log(filtering,"filter")
+    // console.log(breed)
 
     return (
         <>
