@@ -2,11 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Selectedlist from "./selectedbreed";
+import { useDispatch } from "react-redux";
+import { breedId } from "../features/createslice";
 
 function Dropdownbutton() {
     const [option, setoption] = useState([])
-    const [breed, setbreed] = useState([])
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
 
@@ -19,20 +20,18 @@ function Dropdownbutton() {
 
     const onSelect = (e) => {
         e.preventDefault()
-        setbreed(e.target.value)
+        dispatch(breedId(e.target.value))
         navigate("/selectedBreed")
-        // {<Selectedlist breeded={breed} className="hidden"/>}
     }
-
-    console.log(breed)
 
     return (
         <>
             <form>
                 {/* <input id="cats" placeholder="select one" list="cat-breeds" className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-14 rounded-xl py-2 bg-white text-sm text-center font-medium text-gray-700 hover:bg-gray-50" onSelect={onSelect}/>
                 <datalist id="cat-breeds"> */}
-                <select name="cat" onChange={onSelect} className="inline-flex w-full rounded-md border border-gray-300 shadow-sm px-10 rounded-xl py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                    <option className="bg-slate-300">-- select any cat breed --</option>
+                <select name="cat" className="inline-flex w-full rounded-md border border-gray-300 shadow-sm px-10 rounded-xl py-2 bg-white text-sm 
+                font-medium text-gray-700 hover:bg-gray-50" onChange={onSelect}>
+                    {/* <option className="bg-slate-300">-- select any cat breed --</option> */}
                     {option.map((e) => <option value={e.id} key={e.id} className="bg-slate-300">{e.name}</option>)}
                 </select>
                 {/* </datalist> */}
