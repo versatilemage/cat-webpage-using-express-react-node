@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { getcatDetails } from "./createslice";
+import counterReducer from "./createslice"
 
 export const store = configureStore({
     reducer:{
-        allcats: getcatDetails
+        breedid: counterReducer
     }
 })
