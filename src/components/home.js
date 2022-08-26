@@ -8,7 +8,6 @@ import Bottomheader from "./footer"
 function Home() {
     const [catImg, setcatImg] = useState([])
     const [catData, setcatData] = useState([])
-    // const [empty, setempty] = useState([])
 
     useEffect(() => {
         axios.get("http://localhost:3001/kitties")
