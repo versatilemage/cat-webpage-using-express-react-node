@@ -1,12 +1,13 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux";
 import CatStatBar from "./table"
 import Bottomheader from "./footer"
 
-function Selectedlist({breeded}) {
+function Selectedlist() {
     const [breedData, setbreedData] = useState([])
     const [eight, seteight] = useState([])
-    const id = `${breeded}`
+    const {breed} = useSelector((state) => state.breedid)
     useEffect(() => {
         axios.get("http://localhost:3001/catdetails")
             .then(res => {
@@ -15,13 +16,13 @@ function Selectedlist({breeded}) {
     }, [])
 
     useEffect(() => {
-        axios.get(`https://api.thecatapi.com/v1/images/search?breed_ids=${id}&limit=8`)
+        axios.get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breed}&limit=8`)
             .then(res => {
                 seteight(res.data)
             }).catch(err => console.log(err))
     }, [])
 
-    const filtering = breedData.filter((item) => item.id === `${id}`)
+    const filtering = breedData.filter((item) => item.id === `${breed}`)
     console.log(filtering,"filter")
     // console.log(breed)
 
